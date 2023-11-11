@@ -37,6 +37,7 @@ public class SocialMediaController {
         app.post("/register", this::addNewUser);
         app.post("/login", this::loginUser);
         app.get("/messages", this::getAllMessages);
+        app.get("/messages/{message_id}", this::getMessageById);
         return app;
     }
 
@@ -77,6 +78,17 @@ public class SocialMediaController {
          ArrayList <Message> messages = messageService.getAllMessages();
          context.json(messages);
          context.status(200);
+    }
+
+
+    private void getMessageById(Context context){
+        int messageId = Integer.parseInt(context.pathParam("message_id"));
+        Message message = messageService.getMessageById(messageId);
+        context.status(200);
+        if(message.getMessage_text()!= null){
+            context.json(message);
+        }
+       
     }
 
 
