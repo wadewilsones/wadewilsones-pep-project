@@ -1,10 +1,14 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Model.Account;
+import Model.Message;
 import Service.AccountService;
+import Service.MessageService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -21,16 +25,18 @@ public class SocialMediaController {
      */
 
      private AccountService accountService;
-    // private MessageService MessageService;
+     private MessageService messageService;
 
     public SocialMediaController(){
         accountService =  new AccountService();
+        messageService =  new MessageService();
     }
 
     public Javalin startAPI() {
         Javalin app = Javalin.create();
         app.post("/register", this::addNewUser);
         app.post("/login", this::loginUser);
+        app.get("/messages", this::getAllMessages);
         return app;
     }
 
@@ -66,7 +72,12 @@ public class SocialMediaController {
         }
     }
 
-
+    private void getAllMessages(Context context) throws JsonProcessingException{
+         //Read value
+         ArrayList <Message> messages = messageService.getAllMessages();
+         context.json(messages);
+         context.status(200);
+    }
 
 
 }
