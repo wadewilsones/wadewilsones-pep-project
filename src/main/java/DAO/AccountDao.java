@@ -18,8 +18,12 @@ public class AccountDao {
 
     public Account addNewUser(Account account){
 
-            Connection con = ConnectionUtil.getConnection();
-            try{
+        Connection con = ConnectionUtil.getConnection();
+
+            //Validate password and username
+
+            if(account.getPassword().length() >= 4 & account.getUsername() != ""){
+                try{
                     String sqlInsert = "INSERT INTO account (username, password) VALUES (?, ?);";
                     PreparedStatement preparedStatement = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
                     preparedStatement.setString(1, account.getUsername());
@@ -38,7 +42,9 @@ public class AccountDao {
             catch(SQLException exc){
                 System.out.println(exc.getMessage());
             }
-        
+            }
+
+            
             return null;
 
        
