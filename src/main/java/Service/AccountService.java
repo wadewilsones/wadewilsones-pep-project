@@ -23,8 +23,9 @@ public class AccountService {
     //Add user
 
     public Account addNewUser(Account account) {
+        
        Account addedAccount =  accountDao.addNewUser(account);
-        return addedAccount;
+       return addedAccount;
          
     }
 

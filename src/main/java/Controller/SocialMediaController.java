@@ -47,7 +47,7 @@ public class SocialMediaController {
             context.json(mapper.writeValueAsString(addedAccount));
             context.status(200);
         }else{
-            context.status(200);
+            context.status(400);
         }
     }
 
