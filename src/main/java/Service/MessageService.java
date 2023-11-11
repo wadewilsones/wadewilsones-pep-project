@@ -9,7 +9,7 @@ public class MessageService {
     private MessageDao messageDao;
 
     public MessageService(){
-        MessageDao messageDao = new MessageDao();
+        messageDao = new MessageDao();
     }
 
     MessageService(MessageDao messageDao ){

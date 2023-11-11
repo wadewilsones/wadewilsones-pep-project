@@ -72,7 +72,7 @@ public class SocialMediaController {
         }
     }
 
-    private void getAllMessages(Context context) throws JsonProcessingException{
+    private void getAllMessages(Context context){
          //Read value
          ArrayList <Message> messages = messageService.getAllMessages();
          context.json(messages);

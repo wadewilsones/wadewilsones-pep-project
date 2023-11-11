@@ -12,8 +12,6 @@ import Util.ConnectionUtil;
 
 public class MessageDao {
 
-
-
     //Get all messages
     public ArrayList<Message> getAllMessages(){
 
