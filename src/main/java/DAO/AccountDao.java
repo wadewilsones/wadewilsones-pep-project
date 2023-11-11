@@ -38,22 +38,40 @@ public class AccountDao {
                         return null;
                     }
                
-            }
-            catch(SQLException exc){
-                System.out.println(exc.getMessage());
-            }
-            }
-
+                }
+                catch(SQLException exc){
+                    System.out.println(exc.getMessage());
+                }
+        }
             
             return null;
+        }
 
-       
+    // Login user
+
+    public Account loginUser(Account account){
+
+            Connection con = ConnectionUtil.getConnection();
+
+            try{
+                String sql = "SELECT * FROM account WHERE username = ? AND password = ?";
+                PreparedStatement preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setString(1, account.getUsername());
+                preparedStatement.setString(2, account.getPassword());
+             
+                ResultSet result = preparedStatement.executeQuery();
+                if(result.next()){
+                    return new Account(result.getInt("account_id"), result.getString("username"), result.getString("password"));
+                }       
+        }
+        catch(SQLException exc){
+            System.out.println(exc.getMessage());
+        }
+
+        return null;
+   
     }
 }
-
-
-
-    //Verify User
 
     
     

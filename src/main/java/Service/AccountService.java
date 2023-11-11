@@ -23,11 +23,16 @@ public class AccountService {
     //Add user
 
     public Account addNewUser(Account account) {
-        
+
        Account addedAccount =  accountDao.addNewUser(account);
        return addedAccount;
          
     }
 
     //Validate User
+
+    public Account loginUser(Account account){
+        Account verifiedAccount = accountDao.loginUser(account);
+        return verifiedAccount;
+    }
 }
