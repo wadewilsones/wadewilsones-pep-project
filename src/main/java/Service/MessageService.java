@@ -42,6 +42,12 @@ public class MessageService {
         Message newMessage = messageDao.createMessage(bodyMessage);
         return newMessage;
     }
+
+    public ArrayList<Message> getUsersMessages(int accountID) {
+
+        ArrayList<Message> messages = messageDao.getUsersMessages(accountID);
+        return messages;
+    }
     
     
 }

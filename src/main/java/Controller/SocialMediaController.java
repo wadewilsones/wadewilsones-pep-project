@@ -39,6 +39,7 @@ public class SocialMediaController {
         app.post("/login", this::loginUser);
         app.get("/messages", this::getAllMessages);
         app.get("/messages/{message_id}", this::getMessageById);
+        app.get("/accounts/{account_id}/messages", this::getUsersMessages);
         app.post("/messages", this::createMessage);
         app.delete("/messages/{message_id}", this::deleteMessageById);
         app.patch("/messages/{message_id}", this::updateMessageById);
@@ -137,4 +138,16 @@ public class SocialMediaController {
             
        
     }
+
+    private void getUsersMessages(Context context) throws JsonMappingException, JsonProcessingException{
+
+        //ObjectMapper mapper = new ObjectMapper();
+        int accountID = Integer.parseInt(context.pathParam("account_id"));
+        //Account account = mapper.readValue(context.body(), Account.class);
+
+        ArrayList <Message> userMessages = messageService.getUsersMessages(accountID);
+        context.status(200);
+        context.json(userMessages);
+    }
+
 }
