@@ -37,6 +37,11 @@ public class MessageService {
         return message;
        
     }
+
+    public Message createMessage(Message bodyMessage) {
+        Message newMessage = messageDao.createMessage(bodyMessage);
+        return newMessage;
+    }
     
     
 }
