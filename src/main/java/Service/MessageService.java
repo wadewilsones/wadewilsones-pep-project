@@ -26,6 +26,12 @@ public class MessageService {
         return message;
     }
 
+    public Message deleteMessageById(int messageId) {
+        Message message = messageDao.deleteMessageById(messageId);
+        return message;
+       
+    }
+
     
     
 }
