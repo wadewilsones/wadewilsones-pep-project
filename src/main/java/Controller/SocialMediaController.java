@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Model.Account;
@@ -39,6 +40,7 @@ public class SocialMediaController {
         app.get("/messages", this::getAllMessages);
         app.get("/messages/{message_id}", this::getMessageById);
         app.delete("/messages/{message_id}", this::deleteMessageById);
+        app.patch("/messages/{message_id}", this::updateMessageById);
         return app;
     }
 
@@ -100,6 +102,25 @@ public class SocialMediaController {
         if(message.getMessage_text()!= null){
             context.json(message);
         }
+       
+    }
+
+    private void updateMessageById(Context context) throws JsonMappingException, JsonProcessingException{
+        int messageId = Integer.parseInt(context.pathParam("message_id"));
+        ObjectMapper mapper = new ObjectMapper();
+        Message bodyMessage = mapper.readValue(context.body(), Message.class);
+        String text = bodyMessage.getMessage_text();
+
+        Message message = messageService.updateMessageById(messageId, text);
+
+        if(message.getMessage_text() != null){
+            context.status(200);
+            context.json(message);
+        }
+        else{
+            context.status(400);
+        }
+            
        
     }
 }

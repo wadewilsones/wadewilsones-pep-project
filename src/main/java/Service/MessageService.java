@@ -32,6 +32,11 @@ public class MessageService {
        
     }
 
+    public Message updateMessageById(int messageId, String text) {
+        Message message = messageDao.updateMessageById(messageId, text);
+        return message;
+       
+    }
     
     
 }

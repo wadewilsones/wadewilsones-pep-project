@@ -82,7 +82,37 @@ public class MessageDao {
     }
 
 
-    //Update message based on ID
+        //Update message based on ID
+
+    public Message updateMessageById(int messageId, String text) {
+
+        Connection con = ConnectionUtil.getConnection();
+        Message newMessage = new Message();
+
+            if(text.length() < 255 & text != ""){
+                try{
+
+                    String sql = "UPDATE message SET message_text = ? WHERE message_id = ?;";
+                    PreparedStatement statement = con.prepareStatement(sql);
+                    statement.setString(1, text);
+                    statement.setInt(2, messageId);
+                    int rowsAffected = statement.executeUpdate();
+                    if(rowsAffected > 0){
+                        newMessage = getMessageById(messageId);
+                        return newMessage;
+                    }
+        
+                }
+                catch(SQLException e){
+                    System.out.println(e);
+                }
+            }
+           
+        return newMessage;
+        
+    }
+
+
 
 
     //Get all messages from a given Account ID
